@@ -1,5 +1,5 @@
 from fastapi import FastAPI, UploadFile, File
-from fastapi.responses import HTMLResponse
+from fastapi.responses import HTMLResponse, FileResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
@@ -43,6 +43,10 @@ If the answer is not present in the context, say: "I could not find the answer i
 Be clear, concise, and helpful."""),
     ("human", "Context:\n{context}\n\nQuestion:\n{question}")
 ])
+
+@app.get("/logo.png")
+async def get_logo():
+    return FileResponse("logo.png")
 
 @app.get("/", response_class=HTMLResponse)
 async def read_root():
