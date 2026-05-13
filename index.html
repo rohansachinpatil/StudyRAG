@@ -73,15 +73,18 @@
   }
 
   .logo-icon {
-    width: 28px;
-    height: 28px;
-    background: var(--accent);
-    color: white;
-    border-radius: var(--radius-sm);
+    width: 32px;
+    height: 32px;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 16px;
+    flex-shrink: 0;
+  }
+
+  .logo-icon img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
   }
 
   .topbar-right {
@@ -663,7 +666,9 @@
 
 <div class="topbar">
   <div class="logo">
-    <div class="logo-icon">📓</div>
+    <div class="logo-icon">
+      <img src="logo.png" alt="StudyRAG Logo">
+    </div>
     StudyRAG
   </div>
   <div class="topbar-right">
