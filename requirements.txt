@@ -1,48 +1,19 @@
-# LLM Providers
-
-langchain-openai
-langchain-mistralai
-openai
-mistralai
-
-# Vector Database
-
-chromadb
-
-# Embedding Models
-
-sentence-transformers
-
-# Document Loaders dependencies
-
-pypdf
-unstructured
-beautifulsoup4
-lxml
-
-# Text Processing
-
-tiktoken
-
-# Environment Variables
-
-python-dotenv
-
-# Data Handling
-
-pandas
-numpy
-
-# API / App Layer (optional but common in RAG apps)
-
+# Core Web App
 fastapi
 uvicorn
+python-multipart
+python-dotenv
+pydantic
 
-# UI (optional)
+# RAG & AI
+langchain
+langchain-mistralai
+langchain-community
+chromadb
 
-streamlit
+# PDF/Text Processing
+pypdf
+tiktoken
 
 # Utilities
-
-tqdm
 requests
