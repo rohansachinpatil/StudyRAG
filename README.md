@@ -5,11 +5,12 @@ StudyRAG is a professional, AI-powered study assistant inspired by Google's Note
 ![StudyRAG UI](https://img.icons8.com/color/96/artificial-intelligence.png)
 
 ## ✨ Key Features
-- **Modern UI**: Clean, light-themed interface designed for focus.
-- **Multi-Format Support**: Upload PDFs and TXT files directly.
+- **Modern UI**: Clean, light-themed interface inspired by Google's NotebookLM, using **Lucide Icons** for a professional look.
+- **Custom Branding**: Features a stylized AI brain logo in the navigation.
+- **Multi-Format Support**: Upload PDFs and TXT files directly through a drag-and-drop zone.
 - **Smart Retrieval**: Uses MMR (Maximal Marginal Relevance) to find the most diverse and relevant context from your documents.
 - **Mistral Powered**: Utilizes Mistral Small for high-quality, lightning-fast academic answers.
-- **Citations**: Automatically highlights the source text used to generate each answer.
+- **Citations**: Automatically highlights the source text used to generate each answer with dedicated citation cards.
 
 ## 🚀 How It Works (The RAG Pipeline)
 1. **Upload**: User uploads PDFs, lecture notes, or textbooks.
@@ -29,7 +30,8 @@ StudyRAG is a professional, AI-powered study assistant inspired by Google's Note
 - **LLM**: Mistral AI (`mistral-small-2506`)
 - **Embeddings**: Mistral AI Embeddings
 - **Vector Store**: ChromaDB
-- **Frontend**: Vanilla JS, CSS3, HTML5 (NotebookLM Style)
+- **Frontend**: Vanilla JS, HTML5, CSS3
+- **Icons**: Lucide Icons
 
 ## 💻 Local Setup
 
