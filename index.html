@@ -8,6 +8,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 <script src="https://unpkg.com/lucide@latest"></script>
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 <style>
   :root {
     /* NotebookLM Light Theme Colors */
@@ -455,6 +456,34 @@
     background: var(--surface2);
     color: var(--text);
     border-top-left-radius: 4px;
+  }
+
+  .message.ai .msg-bubble h1, 
+  .message.ai .msg-bubble h2, 
+  .message.ai .msg-bubble h3 {
+    margin: 12px 0 8px 0;
+    color: var(--text);
+    font-weight: 600;
+    line-height: 1.3;
+  }
+  
+  .message.ai .msg-bubble h1 { font-size: 18px; }
+  .message.ai .msg-bubble h2 { font-size: 16px; }
+  .message.ai .msg-bubble h3 { font-size: 14px; }
+
+  .message.ai .msg-bubble p {
+    margin-bottom: 12px;
+  }
+  
+  .message.ai .msg-bubble ul, 
+  .message.ai .msg-bubble ol {
+    margin-left: 20px;
+    margin-bottom: 12px;
+  }
+
+  .message.ai .msg-bubble strong {
+    color: var(--text);
+    font-weight: 600;
   }
 
   .message.user .msg-bubble {
@@ -1038,7 +1067,7 @@
       aiDiv.innerHTML = `
         <div class="msg-avatar ai"><i data-lucide="bot" style="width:16px;height:16px"></i></div>
         <div class="msg-bubble">
-          ${escapeHtml(data.answer).replace(/\n/g, '<br>')}
+          <div class="ai-content">${marked.parse(data.answer)}</div>
           ${sourcesHTML}
         </div>
       `;
