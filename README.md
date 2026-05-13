@@ -2,6 +2,8 @@
 
 StudyRAG is a professional, AI-powered study assistant inspired by Google's NotebookLM. It allows students to upload their learning materials (PDFs, textbooks, lecture notes) and interact with them using a Retrieval-Augmented Generation (RAG) pipeline.
 
+**🚀 [Live Demo](https://study-rag-silk.vercel.app/)**
+
 ![StudyRAG UI](https://img.icons8.com/color/96/artificial-intelligence.png)
 
 ## 💡 The Problem
