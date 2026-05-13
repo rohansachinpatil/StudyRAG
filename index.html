@@ -126,6 +126,65 @@
     grid-template-columns: 300px 1fr 280px;
     height: calc(100vh - 56px);
     overflow: hidden;
+    transition: all 0.3s ease;
+  }
+
+  @media (max-width: 1200px) {
+    .layout {
+      grid-template-columns: 260px 1fr;
+    }
+    .right-panel {
+      display: none;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .layout {
+      grid-template-columns: 1fr;
+      position: relative;
+    }
+    .sidebar {
+      position: absolute;
+      left: -300px;
+      top: 0;
+      bottom: 0;
+      width: 280px;
+      z-index: 50;
+      box-shadow: 10px 0 30px rgba(0,0,0,0.1);
+      transition: left 0.3s ease;
+      background: var(--surface);
+    }
+    .sidebar.open {
+      left: 0;
+    }
+    .chat-area {
+      padding: 16px;
+    }
+    .input-bar {
+      padding: 16px;
+    }
+    .message {
+      max-width: 100%;
+    }
+    .msg-bubble {
+      max-width: 90%;
+    }
+    .mobile-nav-toggle {
+      display: flex !important;
+    }
+  }
+
+  .mobile-nav-toggle {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: var(--surface2);
+    border: none;
+    cursor: pointer;
+    color: var(--text2);
   }
 
   /* SIDEBAR - SOURCES */
@@ -666,6 +725,9 @@
 <body>
 
 <div class="topbar">
+  <button class="mobile-nav-toggle" onclick="toggleSidebar()">
+    <i data-lucide="menu"></i>
+  </button>
   <div class="logo">
     <div class="logo-icon">
       <img src="logo.png" alt="StudyRAG Logo">
@@ -996,6 +1058,23 @@
 
     area.scrollTop = area.scrollHeight;
   }
+  function toggleSidebar() {
+    const sidebar = document.querySelector('.sidebar');
+    sidebar.classList.toggle('open');
+  }
+
+  // Close sidebar when clicking outside on mobile
+  document.addEventListener('click', (e) => {
+    const sidebar = document.querySelector('.sidebar');
+    const toggle = document.querySelector('.mobile-nav-toggle');
+    if (window.innerWidth <= 768 && 
+        !sidebar.contains(e.target) && 
+        !toggle.contains(e.target) && 
+        sidebar.classList.contains('open')) {
+      sidebar.classList.remove('open');
+    }
+  });
+
   // ─── INIT ─────────────────────────────────────────────
   lucide.createIcons();
 </script>
