@@ -7,6 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<script src="https://unpkg.com/lucide@latest"></script>
 <style>
   :root {
     /* NotebookLM Light Theme Colors */
@@ -685,12 +686,15 @@
   <div class="sidebar">
     <div class="sidebar-header">
       <span class="sidebar-title">Sources</span>
-      <button class="btn-add" onclick="document.getElementById('file-input').click()">+ Add source</button>
+      <button class="btn-add" onclick="document.getElementById('file-input').click()">
+        <i data-lucide="plus" style="width:14px;height:14px"></i>
+        Add source
+      </button>
     </div>
 
     <div class="upload-zone" id="upload-zone">
       <input type="file" id="file-input" accept=".pdf,.txt,.md" multiple>
-      <span class="upload-icon">📄</span>
+      <i data-lucide="upload-cloud" class="upload-icon"></i>
       <div class="upload-label">
         <strong>Upload documents</strong>
         Drop files or click here
@@ -705,7 +709,7 @@
 
     <div class="sources-list" id="sources-list">
       <div class="no-sources" id="no-sources-msg">
-        <div class="no-sources-icon">📚</div>
+        <i data-lucide="library" class="no-sources-icon"></i>
         <div class="no-sources-text">Add sources to get started</div>
       </div>
     </div>
@@ -715,7 +719,7 @@
   <div class="main">
     <div class="chat-area" id="chat-area">
       <div class="welcome" id="welcome-screen">
-        <div class="welcome-emoji">✨</div>
+        <i data-lucide="sparkles" class="welcome-emoji" style="color:var(--accent)"></i>
         <h1>What would you like to study?</h1>
         <p>Upload your materials on the left, then ask questions. The AI will provide answers grounded in your documents.</p>
       </div>
@@ -755,19 +759,31 @@
       <div class="info-card">
         <div class="card-title">System Config</div>
         <div class="config-row">
-          <span class="config-key">LLM Model</span>
+          <div style="display:flex;align-items:center;gap:8px">
+            <i data-lucide="cpu" style="width:12px;height:12px;color:var(--text3)"></i>
+            <span class="config-key">LLM Model</span>
+          </div>
           <span class="config-val">Mistral</span>
         </div>
         <div class="config-row">
-          <span class="config-key">Embeddings</span>
-          <span class="config-val">HuggingFace</span>
+          <div style="display:flex;align-items:center;gap:8px">
+            <i data-lucide="binary" style="width:12px;height:12px;color:var(--text3)"></i>
+            <span class="config-key">Embeddings</span>
+          </div>
+          <span class="config-val">Mistral API</span>
         </div>
         <div class="config-row">
-          <span class="config-key">Vector Store</span>
+          <div style="display:flex;align-items:center;gap:8px">
+            <i data-lucide="database" style="width:12px;height:12px;color:var(--text3)"></i>
+            <span class="config-key">Vector Store</span>
+          </div>
           <span class="config-val">ChromaDB</span>
         </div>
         <div class="config-row">
-          <span class="config-key">Retrieval</span>
+          <div style="display:flex;align-items:center;gap:8px">
+            <i data-lucide="search" style="width:12px;height:12px;color:var(--text3)"></i>
+            <span class="config-key">Retrieval</span>
+          </div>
           <span class="config-val">MMR (k=4)</span>
         </div>
       </div>
@@ -831,14 +847,18 @@
       const item = document.createElement('div');
       item.className = 'source-item';
       const isPdf = file.name.toLowerCase().endsWith('.pdf');
+      const iconName = isPdf ? 'file-text' : 'file';
       item.innerHTML = `
-        <div class="source-icon ${isPdf ? 'pdf' : 'txt'}">${isPdf ? '📕' : '📄'}</div>
+        <div class="source-icon ${isPdf ? 'pdf' : 'txt'}">
+          <i data-lucide="${iconName}" style="width:18px;height:18px"></i>
+        </div>
         <div class="source-info">
           <div class="source-name">${file.name}</div>
           <div class="source-meta">${data.chunks_count || 0} chunks indexed</div>
         </div>
       `;
       list.appendChild(item);
+      lucide.createIcons();
       
       showToast(`${file.name} uploaded successfully!`);
       updateStatus(true);
@@ -905,7 +925,7 @@
     const userDiv = document.createElement('div');
     userDiv.className = 'message user';
     userDiv.innerHTML = `
-      <div class="msg-avatar user">U</div>
+      <div class="msg-avatar user"><i data-lucide="user" style="width:16px;height:16px"></i></div>
       <div class="msg-bubble">${escapeHtml(query)}</div>
     `;
     area.appendChild(userDiv);
@@ -915,10 +935,11 @@
     typeDiv.className = 'message ai';
     typeDiv.id = 'typing-indicator';
     typeDiv.innerHTML = `
-      <div class="msg-avatar ai">✨</div>
+      <div class="msg-avatar ai"><i data-lucide="bot" style="width:16px;height:16px"></i></div>
       <div class="msg-bubble"><div class="typing"><span></span><span></span><span></span></div></div>
     `;
     area.appendChild(typeDiv);
+    lucide.createIcons();
     area.scrollTop = area.scrollHeight;
 
     try {
@@ -953,28 +974,30 @@
       }
 
       aiDiv.innerHTML = `
-        <div class="msg-avatar ai">✨</div>
+        <div class="msg-avatar ai"><i data-lucide="bot" style="width:16px;height:16px"></i></div>
         <div class="msg-bubble">
           ${escapeHtml(data.answer).replace(/\n/g, '<br>')}
           ${sourcesHTML}
         </div>
       `;
       area.appendChild(aiDiv);
+      lucide.createIcons();
       
     } catch (e) {
       document.getElementById('typing-indicator').remove();
       const errDiv = document.createElement('div');
       errDiv.className = 'message ai';
       errDiv.innerHTML = `
-        <div class="msg-avatar ai">✨</div>
+        <div class="msg-avatar ai"><i data-lucide="alert-circle" style="width:16px;height:16px"></i></div>
         <div class="msg-bubble" style="color:var(--red)">Failed to reach the server.</div>
       `;
       area.appendChild(errDiv);
     }
 
     area.scrollTop = area.scrollHeight;
-    updateStatus(true);
   }
+  // ─── INIT ─────────────────────────────────────────────
+  lucide.createIcons();
 </script>
 </body>
 </html>
